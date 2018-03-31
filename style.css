@@ -78,7 +78,8 @@ body {
 
 h1 {
 	font-size: 2em;
-	margin: 0.67em 0;
+  margin: 0.67em 0;
+  margin-bottom: 0;
 }
 
 /* Grouping content
@@ -397,14 +398,18 @@ select,
 optgroup,
 textarea {
 	color: #333333;
-	font-family: sans-serif;
+  font-family: 'Open Sans', 'sans-serif';
 	font-size: 16px;
 	font-size: 1rem;
-	line-height: 1.5;
+  line-height: 1.5;
 }
 
 h1, h2, h3, h4, h5, h6 {
-	clear: both;
+  clear: both;
+  font-family: 'Merriweather', 'serif';
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  word-spacing: 0.1em;
 }
 
 p {
@@ -705,18 +710,44 @@ a:hover, a:active {
 }
 
 /* menu items */
-.menu-item a {
+.main-navigation .nav-item--right {
+  float: right;
+}
+
+.nav-item a, a.nav-item {
   color: inherit;
+}
+
+.nav-item a:hover, a.nav-item  {
+  color: #605b38;
 }
 
 /* Small menu. */
 .menu-toggle,
 .main-navigation.toggled ul {
-	display: block;
+  display: block;
 }
 
-@media screen and (min-width: 37.5em) {
-	.menu-toggle {
+.main-navigation.toggled .nav-item {
+  float: none;
+  line-height: 2.5em;
+}
+.main-navigation.toggled li:first-child {
+  line-height: 2.5em;
+}
+
+.main-navigation.toggled .nav-item.menu-toggle {
+  float: right;
+  position: relative;
+  z-index: 1; 
+}
+
+.main-navigation.toggled .nav-item--padding-top {
+  padding-top: 20px;
+}
+
+@media screen and (min-width: 800px) {
+	.main-navigation .menu-toggle {
 		display: none;
 	}
 	.main-navigation ul {
@@ -815,10 +846,18 @@ a:hover, a:active {
 .container {
   max-width: 920px;
   margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .container--wide {
   max-width: 1050px;
+}
+
+@media screen and (max-width: 575px) {
+  .container {
+    max-width: 500px;
+  }
 }
 
 /*--------------------------------------------------------------
@@ -883,7 +922,7 @@ a:hover, a:active {
 .page-content,
 .entry-content,
 .entry-summary {
-	margin: 1.5em 0 0;
+	margin: 0;
 }
 
 .page-links {

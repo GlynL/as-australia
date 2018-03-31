@@ -25,7 +25,7 @@
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'as-australia' ); ?></a>
 
 	<header id="masthead" class="site-header">
-		<div class="site-branding">
+		<div class="container container--wide site-branding">
 			<?php
 			the_custom_logo();
 			if ( is_front_page() && is_home() ) :
@@ -43,18 +43,23 @@
 				<p class="site-description"><?php echo $as_australia_description; /* WPCS: xss ok. */ ?></p>
 			<?php endif; ?>
 		</div><!-- .site-branding -->
-    
+
     <div class='container container--wide'>
       <nav id="site-navigation" class="main-navigation">
+
+        <a class="nav-item nav-item--right menu-toggle">&#9776;</a>
+
         <ul>
-          <li class='nav-item'>Home</li>
-          <li class='nav-item'>About Us</li>
-          <li class='nav-item'>Contact</li>
-          <li class='nav-item'>Events</li>
-          <li class='nav-item'>Membership</li>
-          <li class='nav-item nav-item--right'>Register</li>
-          <li class='nav-item nav-item--right'>Log-In</li>
+          <li class='nav-item'><a href='<?php echo site_url(); ?>'>Home</a></li>
+          <li class='nav-item'><a href='<?php echo site_url("/about-us"); ?>'>About Us</a></li>
+          <li class='nav-item'><a href='<?php echo site_url("/contact"); ?>'>Contact</a></li>
+          <li class='nav-item'><a href='#'>Events</a></li>
+          <li class='nav-item'><a href='<?php echo site_url("/membership"); ?>'>Membership</a></li>
+          <!-- right side nav -->
+          <li class='nav-item nav-item--right nav-item--padding-top'><a href='<?php echo site_url("/log-in"); ?>'>Log-In</a></li>
+          <li class='nav-item nav-item--right'><a href='<?php echo site_url("/register"); ?>'>Register</a></li>
         </ul>
+
       </nav><!-- #site-navigation -->
     </div><!-- .container -->
 	</header><!-- #masthead -->

@@ -120,6 +120,8 @@ add_action( 'widgets_init', 'as_australia_widgets_init' );
  * Enqueue scripts and styles.
  */
 function as_australia_scripts() {
+  wp_enqueue_style('as-australia-googlefonts', 'https://fonts.googleapis.com/css?family=Merriweather:700|Open+Sans', false);
+
 	wp_enqueue_style( 'as-australia-style', get_stylesheet_uri() );
 
 	wp_enqueue_script( 'as-australia-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
