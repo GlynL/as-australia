@@ -24,19 +24,40 @@
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'as-australia' ); ?></a>
 
-	<header id="masthead" class="site-header">
+	<header id="masthead" class="site-header site-header--front-page">
+    <?php if (is_front_page()) { ?>
+      <div class='container container--wide'>
+        <nav id="site-navigation" class="main-navigation main-navigation--front">
+
+          <a class="nav-item nav-item--right menu-toggle">&#9776;</a>
+
+          <ul>
+            <li class='nav-item'><a href='<?php echo site_url(); ?>'>Home</a></li>
+            <li class='nav-item'><a href='<?php echo site_url("/about-us"); ?>'>About Us</a></li>
+            <li class='nav-item'><a href='<?php echo site_url("/contact"); ?>'>Contact</a></li>
+            <li class='nav-item'><a href='#'>Events</a></li>
+            <li class='nav-item'><a href='<?php echo site_url("/membership"); ?>'>Membership</a></li>
+            <!-- right side nav -->
+            <li class='nav-item nav-item--right nav-item--padding-top'><a href='<?php echo site_url("/log-in"); ?>'><i class='fas fa-sign-in-alt'></i>  Log-In</a></li>
+            <li class='nav-item nav-item--right'><a href='<?php echo site_url("/register"); ?>'><i class="fas fa-user"></i> Register</a></li>
+          </ul>
+
+        </nav><!-- #site-navigation -->
+      </div><!-- .container -->
+    <?php } ?>
+
 		<div class="container container--wide site-branding">
 			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
+      the_custom_logo();
+      
+			if (!is_front_page()) {
+        ?>
         <img class='aligncenter' src="<?php echo get_theme_file_uri('/img/as-logo.PNG'); ?>" alt="AS Australia">
 				<?php
-			else :
+      }
+				
 				?>
-        <img class='aligncenter' src="<?php echo get_theme_file_uri('/img/as-logo.PNG'); ?>" alt="AS Australia">
 				<?php
-			endif;
 			$as_australia_description = get_bloginfo( 'description', 'display' );
 			if ( $as_australia_description || is_customize_preview() ) :
 				?>
@@ -44,24 +65,27 @@
 			<?php endif; ?>
 		</div><!-- .site-branding -->
 
-    <div class='container container--wide'>
-      <nav id="site-navigation" class="main-navigation">
+    <?php if (!is_front_page() && !is_home()) { ?>
+      <div class='container container--wide'>
+        <nav id="site-navigation" class="main-navigation">
 
-        <a class="nav-item nav-item--right menu-toggle">&#9776;</a>
+          <a class="nav-item nav-item--right menu-toggle">&#9776;</a>
 
-        <ul>
-          <li class='nav-item'><a href='<?php echo site_url(); ?>'>Home</a></li>
-          <li class='nav-item'><a href='<?php echo site_url("/about-us"); ?>'>About Us</a></li>
-          <li class='nav-item'><a href='<?php echo site_url("/contact"); ?>'>Contact</a></li>
-          <li class='nav-item'><a href='#'>Events</a></li>
-          <li class='nav-item'><a href='<?php echo site_url("/membership"); ?>'>Membership</a></li>
-          <!-- right side nav -->
-          <li class='nav-item nav-item--right nav-item--padding-top'><a href='<?php echo site_url("/log-in"); ?>'>Log-In</a></li>
-          <li class='nav-item nav-item--right'><a href='<?php echo site_url("/register"); ?>'>Register</a></li>
-        </ul>
+          <ul>
+            <li class='nav-item'><a href='<?php echo site_url(); ?>'>Home</a></li>
+            <li class='nav-item'><a href='<?php echo site_url("/about-us"); ?>'>About Us</a></li>
+            <li class='nav-item'><a href='<?php echo site_url("/contact"); ?>'>Contact</a></li>
+            <li class='nav-item'><a href='#'>Events</a></li>
+            <li class='nav-item'><a href='<?php echo site_url("/membership"); ?>'>Membership</a></li>
+            <!-- right side nav -->
+            <li class='nav-item nav-item--right nav-item--padding-top'><a href='<?php echo site_url("/log-in"); ?>'><i class='fas fa-sign-in-alt'></i>  Log-In</a></li>
+            <li class='nav-item nav-item--right'><a href='<?php echo site_url("/register"); ?>'><i class="fas fa-user"></i> Register</a></li>
+          </ul>
 
-      </nav><!-- #site-navigation -->
-    </div><!-- .container -->
+        </nav><!-- #site-navigation -->
+      </div><!-- .container -->
+    <?php } ?>
+   
 	</header><!-- #masthead -->
 
 	<div id="content" class="site-content">

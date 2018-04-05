@@ -7,6 +7,13 @@
  * @package as-australia
  */
 
+// for printing variable values with formatting
+function vd($var) {
+  echo "<pre>";
+  print_r($var);
+  echo "</pre>";
+}
+
 if ( ! function_exists( 'as_australia_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.
@@ -121,14 +128,12 @@ add_action( 'widgets_init', 'as_australia_widgets_init' );
  */
 function as_australia_scripts() {
   wp_enqueue_style('as-australia-googlefonts', 'https://fonts.googleapis.com/css?family=Merriweather:700|Open+Sans', false);
+  wp_enqueue_style('as-australia-fa', 'https://use.fontawesome.com/releases/v5.0.9/css/all.css');
+  wp_enqueue_style( 'as-australia-style', get_stylesheet_uri());
+	wp_enqueue_script( 'as-australia-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true);
+	wp_enqueue_script( 'as-australia-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true);
 
-	wp_enqueue_style( 'as-australia-style', get_stylesheet_uri() );
-
-	wp_enqueue_script( 'as-australia-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
-
-	wp_enqueue_script( 'as-australia-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
-
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+	if ( is_singular() && comments_open() && get_option( 'thread_comments' )) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
