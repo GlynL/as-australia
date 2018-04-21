@@ -24,7 +24,7 @@
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'as-australia' ); ?></a>
 
-	<header id="masthead" class="site-header site-header--front-page">
+	<header id="masthead" class="site-header <?php if(is_front_page()) echo 'site-header--front-page' ?>">
     <?php if (is_front_page()) { ?>
       <div class='container container--wide'>
         <nav id="site-navigation" class="main-navigation main-navigation--front">
@@ -35,11 +35,17 @@
             <li class='nav-item'><a href='<?php echo site_url(); ?>'>Home</a></li>
             <li class='nav-item'><a href='<?php echo site_url("/about-us"); ?>'>About Us</a></li>
             <li class='nav-item'><a href='<?php echo site_url("/contact"); ?>'>Contact</a></li>
-            <li class='nav-item'><a href='#'>Events</a></li>
+            <li class='nav-item'><a href='<?php echo site_url("/events"); ?>'>Events</a></li>
             <li class='nav-item'><a href='<?php echo site_url("/membership"); ?>'>Membership</a></li>
             <!-- right side nav -->
-            <li class='nav-item nav-item--right nav-item--padding-top'><a href='<?php echo site_url("/log-in"); ?>'><i class='fas fa-sign-in-alt'></i>  Log-In</a></li>
-            <li class='nav-item nav-item--right'><a href='<?php echo site_url("/register"); ?>'><i class="fas fa-user"></i> Register</a></li>
+            <?php
+              if (is_user_logged_in()) { ?>
+                <li class='nav-item nav-item--right nav-item--padding-top'><a href='<?php echo wp_logout_url(); ?>'><i class='fas fa-sign-in-alt'></i>  Log-Out</a></li>
+              <?php } else { ?>
+                <li class='nav-item nav-item--right nav-item--padding-top'><a href='<?php echo wp_login_url(); ?>'><i class='fas fa-sign-in-alt'></i>  Log-In</a></li>
+                <li class='nav-item nav-item--right'><a href='<?php echo wp_registration_url(); ?>'><i class="fas fa-user"></i> Register</a></li>
+              <?php }
+            ?>
           </ul>
 
         </nav><!-- #site-navigation -->
@@ -75,12 +81,18 @@
             <li class='nav-item'><a href='<?php echo site_url(); ?>'>Home</a></li>
             <li class='nav-item'><a href='<?php echo site_url("/about-us"); ?>'>About Us</a></li>
             <li class='nav-item'><a href='<?php echo site_url("/contact"); ?>'>Contact</a></li>
-            <li class='nav-item'><a href='#'>Events</a></li>
+            <li class='nav-item'><a href='<?php echo site_url("/events"); ?>'>Events</a></li>
             <li class='nav-item'><a href='<?php echo site_url("/membership"); ?>'>Membership</a></li>
             <!-- right side nav -->
-            <li class='nav-item nav-item--right nav-item--padding-top'><a href='<?php echo site_url("/log-in"); ?>'><i class='fas fa-sign-in-alt'></i>  Log-In</a></li>
-            <li class='nav-item nav-item--right'><a href='<?php echo site_url("/register"); ?>'><i class="fas fa-user"></i> Register</a></li>
-          </ul>
+            <?php
+              if (is_user_logged_in()) { ?>
+                <li class='nav-item nav-item--right nav-item--padding-top'><a href='<?php echo wp_logout_url(); ?>'><i class='fas fa-sign-in-alt'></i>  Log-Out</a></li>
+              <?php } else { ?>
+                <li class='nav-item nav-item--right nav-item--padding-top'><a href='<?php echo wp_login_url(); ?>'><i class='fas fa-sign-in-alt'></i>  Log-In</a></li>
+                <li class='nav-item nav-item--right'><a href='<?php echo wp_registration_url(); ?>'><i class="fas fa-user"></i> Register</a></li>
+              <?php }
+            ?>
+            </ul>
 
         </nav><!-- #site-navigation -->
       </div><!-- .container -->

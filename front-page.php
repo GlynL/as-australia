@@ -17,11 +17,21 @@
 
       <!-- events query -->
       <?php
+      $today = date('Ymd');
       $homepageEvents = new WP_Query(array(
         'posts_per_page' => 1,
         'post_type' => 'event',
-        'order' => 'ASC'
-
+        'meta_key' => 'event_date',
+        'orderby' => 'meta_value_num',
+        'order' => 'ASC',
+        'meta_query' => array(
+          array(
+            'key' => 'event_date',
+            'compare' => '>=',
+            'value' => $today,
+            'type' => 'numeric'
+          )
+        )
       ));
       ?>
 
@@ -34,10 +44,10 @@
               while($homepageEvents->have_posts()) {
                 $homepageEvents->the_post(); ?>
                 <li>
-                  <h4><?php the_title(); ?></h4>
+                  <h4 class='event-title'><?php the_title(); ?></h4>
                   <?php $eventDate = new DateTime(get_field('event_date')); ?>
-                  <p><?php echo $eventDate->format('d M') ?></p>
-                  <p><?php echo wp_trim_words(get_the_content(), 15); ?></p>
+                  <span class='date'><?php echo $eventDate->format('d M') ?></span>
+                  <p class='description'><?php echo wp_trim_words(get_the_content(), 15); ?></p>
                 </li>
               <?php
               } ?>
@@ -45,11 +55,11 @@
           </span
           ><span class='gallery-item gallery-item--border'>
             <h3>About Us</h3>
-            <p>Providing support & information to those suffering from AS.</p>
+            <p class='description'>Providing support & information to those suffering from AS.</p>
           </span
           ><span class='gallery-item'>
             <h3>Contact</h3>
-            <p>Contact us now for mroe information</p>
+            <p class='description'>Contact us now for mroe information</p>
           </span>
         </div>
       </div><!-- .btf -->

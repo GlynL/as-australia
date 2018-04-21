@@ -166,3 +166,81 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+
+
+/**
+* ADJUSTED QUERIES 
+*/
+
+function university_adjust_queries($query) {
+  if (!is_admin() && is_post_type_archive('event') && $query->is_main_query()) {
+    $query->set('meta_key', 'event_date');
+    $query->set('orderby', 'meta_value_num');
+    $query->set('order', 'ASC');
+    $query->set('meta_query', array(
+      array(
+        'key' => 'event_date',
+        'compare' => '>=',
+        'value' => date('Ymd'),
+        'type' => 'numeric'
+      )
+    ));
+  };
+}
+
+add_action('pre_get_posts', 'university_adjust_queries');
+
+
+/* ------------------
+LOG-IN Logic
+--------------------*/
+
+// redirect subscriber accounts out of admin and onto homepage
+add_action('admin_init', 'redirectSubsToFrontend');
+  
+function redirectSubsToFrontend() {
+  $ourCurrentUser = wp_get_current_user();
+  if (count($ourCurrentUser->roles) === 1 && $ourCurrentUser->roles[0] === 'subscriber') {
+    wp_redirect(site_url('/'));
+    exit;
+  }
+}
+
+// remove admin bar for subs
+add_action('wp_loaded', 'noSubsAdminBar');
+  
+function noSubsAdminBar() {
+  $ourCurrentUser = wp_get_current_user();
+  if (count($ourCurrentUser->roles) === 1 && $ourCurrentUser->roles[0] === 'subscriber') {
+    show_admin_bar(false);
+  }
+}
+
+// change login page logo url
+add_filter('login_headerurl', 'ourHeaderUrl');
+
+function ourHeaderUrl() {
+  return esc_url(site_url('/'));
+}
+
+ // load css on login screen
+ add_action('login_enqueue_scripts', 'ourLoginCSS');
+
+ function ourLoginCSS() {
+  wp_enqueue_style('as-australia-googlefonts', 'https://fonts.googleapis.com/css?family=Merriweather:700|Open+Sans', false);
+  wp_enqueue_style('as-australia-style', get_stylesheet_uri());
+ }
+ 
+ add_filter('login_headertitle', 'ourLoginTitle');
+
+ // change title/hover info
+ function ourLoginTitle() {
+   return get_bloginfo('name');
+ }
+
+ add_filter('message_register', 'ourRegisterMessage');
+
+ function ourRegisterMessage() {
+   $message = "<p class='message'>Test</p>";
+   return $message;
+ }
