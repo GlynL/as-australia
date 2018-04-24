@@ -44,6 +44,7 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
   ## Galleries
 # Specific Classes
   ## Log-in Page
+  ## Event & Attending
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
 # Normalize
@@ -631,6 +632,17 @@ textarea {
   padding: 1em;
   color: #f2f2f2;
   display: inline-block;
+}
+
+.btn:hover, .btn:focus {
+  background-color: hsl(41, 19%, 55%);
+  color: hsl(0, 0%, 95%);
+  box-shadow: none;
+  cursor: pointer;
+}
+
+btn:active {
+  box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 a.btn, a.btn:visited {
@@ -1221,6 +1233,7 @@ object {
   background-color: #f2f2f2;
   box-shadow: 0 1px 1px rgba(150, 135, 102, 0.25);
   border-left: 4px solid hsl(41, 19%, 55%);
+  border-radius: 5px;
 }
 
 
@@ -1239,3 +1252,28 @@ a.btn:hover, a.btn:focus {
 a.btn:active {
   box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
 } */
+
+
+/*--------------------------------------------------------------
+## Event & Attending
+--------------------------------------------------------------*/
+.event-heading, .event-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.event-heading {
+  margin-top: 1em;
+}
+
+.event-heading--title {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.btn[data-rsvp='yes'] {
+  background-color: hsl(52, 26%, 76%);
+  color: #333;
+  box-shadow: inset 0 0 5px hsl(41, 19%, 40%);
+}

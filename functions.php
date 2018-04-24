@@ -131,7 +131,8 @@ function as_australia_scripts() {
   wp_enqueue_style('as-australia-fa', 'https://use.fontawesome.com/releases/v5.0.9/css/all.css');
   wp_enqueue_style( 'as-australia-style', get_stylesheet_uri());
 	wp_enqueue_script( 'as-australia-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true);
-	wp_enqueue_script( 'as-australia-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true);
+  wp_enqueue_script( 'as-australia-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true);
+  wp_enqueue_script('as-australia-rsvp', get_template_directory_uri() . '/js/rsvp.js', NULL, microtime(), true);
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' )) {
 		wp_enqueue_script( 'comment-reply' );
@@ -166,6 +167,11 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+/**
+ * RSVP Custom API Route
+ */
+
+require get_theme_file_path('/inc/rsvp-route.php');
 
 
 /**
@@ -238,9 +244,11 @@ function ourHeaderUrl() {
    return get_bloginfo('name');
  }
 
- add_filter('message_register', 'ourRegisterMessage');
+ add_filter('login_message', 'ourRegisterMessage');
 
- function ourRegisterMessage() {
-   $message = "<p class='message'>Test</p>";
+ function ourRegisterMessage($message) {
+   if ($message === '<p class="message register">Register For This Site</p>') {
+     $message = '<p class="message register">Register</p>';
+   };
    return $message;
  }

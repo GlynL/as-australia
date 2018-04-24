@@ -40,9 +40,9 @@
             <!-- right side nav -->
             <?php
               if (is_user_logged_in()) { ?>
-                <li class='nav-item nav-item--right nav-item--padding-top'><a href='<?php echo wp_logout_url(); ?>'><i class='fas fa-sign-in-alt'></i>  Log-Out</a></li>
+                <li class='nav-item nav-item--right nav-item--padding-top'><a href='<?php echo wp_logout_url(get_post_type() !== 'page' ? get_post_type_archive_link(get_post_type()) : get_permalink()); ?>'><i class='fas fa-sign-in-alt'></i>  Log-Out</a></li>
               <?php } else { ?>
-                <li class='nav-item nav-item--right nav-item--padding-top'><a href='<?php echo wp_login_url(); ?>'><i class='fas fa-sign-in-alt'></i>  Log-In</a></li>
+                <li class='nav-item nav-item--right nav-item--padding-top'><a href='<?php echo wp_login_url(get_post_type() !== 'page' ? get_post_type_archive_link(get_post_type()) : get_permalink()); ?>'><i class='fas fa-sign-in-alt'></i>  Log-In</a></li>
                 <li class='nav-item nav-item--right'><a href='<?php echo wp_registration_url(); ?>'><i class="fas fa-user"></i> Register</a></li>
               <?php }
             ?>
@@ -86,9 +86,9 @@
             <!-- right side nav -->
             <?php
               if (is_user_logged_in()) { ?>
-                <li class='nav-item nav-item--right nav-item--padding-top'><a href='<?php echo wp_logout_url(); ?>'><i class='fas fa-sign-in-alt'></i>  Log-Out</a></li>
+                <li class='nav-item nav-item--right nav-item--padding-top'><a href='<?php echo wp_logout_url(get_post_type() !== 'page' ? get_post_type_archive_link(get_post_type()) : get_permalink()); ?>'><i class='fas fa-sign-in-alt'></i>  Log-Out</a></li>
               <?php } else { ?>
-                <li class='nav-item nav-item--right nav-item--padding-top'><a href='<?php echo wp_login_url(); ?>'><i class='fas fa-sign-in-alt'></i>  Log-In</a></li>
+                <li class='nav-item nav-item--right nav-item--padding-top'><a href='<?php echo wp_login_url(get_post_type() !== 'page' ? get_post_type_archive_link(get_post_type()) : get_permalink()); ?>'><i class='fas fa-sign-in-alt'></i>  Log-In</a></li>
                 <li class='nav-item nav-item--right'><a href='<?php echo wp_registration_url(); ?>'><i class="fas fa-user"></i> Register</a></li>
               <?php }
             ?>
@@ -101,8 +101,6 @@
 	</header><!-- #masthead -->
 
 	<div id="content" class="site-content">
-
-
 
 
 <!-- included menu -->
