@@ -56,7 +56,7 @@ get_header();
               <h1 class='event-heading--title'><?php the_title();?></h1>
               <!-- probably remove later -->
               <?php echo ($rsvped) ? 'You are attending': 'Please RSVP if you are attending';  ?>
-              <button class='event-heading--rsvp btn' data-rsvp='<?php echo $rsvped ? "yes" : "" ?>'>
+              <button class='event-heading--rsvp btn' data-rsvp='<?php echo $rsvped ? "yes" : "" ?>' data-event='<?php the_ID(); ?>'>
                 <?php echo $rsvped ? 'Attending' : 'RSVP <i class="fas fa-users"></i>' ?>
               </button>
             </header>
